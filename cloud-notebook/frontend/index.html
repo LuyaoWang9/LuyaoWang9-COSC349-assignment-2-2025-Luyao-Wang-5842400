@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Notebook</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📝 Cloud Notebook</h1>
+            <button id="newNoteBtn" class="btn-primary">+ New Note</button>
+        </header>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <h3>Your Notes</h3>
+                <div id="notesList" class="notes-list">
+                    <!-- Notes will be loaded here -->
+                </div>
+            </div>
+
+            <div class="editor">
+                <div id="emptyState" class="empty-state">
+                    <p>Select a note or create a new one to start writing</p>
+                </div>
+                
+                <div id="noteEditor" class="note-editor" style="display: none;">
+                    <input type="text" id="noteTitle" placeholder="Note title...">
+                    <textarea id="noteContent" placeholder="Start writing your note here..."></textarea>
+                    <div class="editor-actions">
+                        <button id="saveBtn" class="btn-primary">Save</button>
+                        <button id="deleteBtn" class="btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
