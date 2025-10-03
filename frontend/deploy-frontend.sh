@@ -40,7 +40,7 @@ server {
 
     # Health check endpoint
     location /health {
-        proxy_pass http://$BACKEND_IP:5054/health;
+        proxy_pass http://$BACKEND_IP:8080/health;
         proxy_set_header Host \$host;
     }
 
