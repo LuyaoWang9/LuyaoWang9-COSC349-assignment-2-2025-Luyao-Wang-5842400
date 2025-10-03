@@ -4,8 +4,6 @@ import mysql.connector
 import os
 from datetime import datetime
 import time
-import boto3
-import json
 
 app = Flask(__name__)
 CORS(app)
@@ -253,64 +251,6 @@ def get_stats():
         })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
-
-
-
-# Add these new routes after your existing routes
-
-@app.route('/lambda-stats', methods=['GET'])
-def get_lambda_stats():
-    """Get statistics from AWS Lambda function"""
-    try:
-        # Initialize Lambda client
-        lambda_client = boto3.client('lambda', region_name='us-east-1')
-        
-        # Invoke Lambda function
-        response = lambda_client.invoke(
-            FunctionName='cloud-notebook-stats',
-            InvocationType='RequestResponse'  # Synchronous execution
-        )
-        
-        # Parse Lambda response
-        lambda_response = json.loads(response['Payload'].read())
-        
-        return jsonify({
-            'message': 'Statistics from AWS Lambda',
-            'lambda_response': lambda_response,
-            'services_used': ['AWS Lambda', 'RDS MySQL']
-        })
-        
-    except Exception as e:
-        return jsonify({
-            'error': str(e),
-            'message': 'Failed to get Lambda statistics'
-        }), 500
-
-@app.route('/trigger-lambda', methods=['POST'])
-def trigger_lambda():
-    """Trigger Lambda function asynchronously"""
-    try:
-        lambda_client = boto3.client('lambda', region_name='us-east-1')
-        
-        response = lambda_client.invoke(
-            FunctionName='cloud-notebook-stats',
-            InvocationType='Event'  # Asynchronous execution
-        )
-        
-        return jsonify({
-            'message': 'Lambda function triggered successfully',
-            'invocation_type': 'asynchronous',
-            'status_code': response['StatusCode']
-        })
-        
-    except Exception as e:
-        return jsonify({
-            'error': str(e),
-            'message': 'Failed to trigger Lambda function'
-        }), 500
-
-# Add boto3 to your imports at the top if not already there
 
 if __name__ == '__main__':
     print("🚀 Starting Cloud Notebook Backend on Port 8080...")
