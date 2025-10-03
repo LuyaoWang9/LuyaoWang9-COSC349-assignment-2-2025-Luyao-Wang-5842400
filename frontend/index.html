@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +18,7 @@
             <div class="sidebar">
                 <h3>Your Notes</h3>
                 <div id="notesList" class="notes-list">
-                    <!-- Notes will be loaded here -->
+                    <div class="loading">Loading notes...</div>
                 </div>
             </div>
 
@@ -31,7 +32,7 @@
                     <textarea id="noteContent" placeholder="Start writing your note here..."></textarea>
                     <div class="editor-actions">
                         <button id="saveBtn" class="btn-primary">Save</button>
-                        <button id="deleteBtn" class="btn-danger">Delete</button>
+                        <button id="deleteBtn" class="btn-danger" style="display: none;">Delete</button>
                     </div>
                 </div>
             </div>
