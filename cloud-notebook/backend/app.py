@@ -253,9 +253,9 @@ def get_stats():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    print("🚀 Starting Cloud Notebook Backend in PRODUCTION...")
+    print("🚀 Starting Cloud Notebook Backend on Port 8080...")
     print(f"🌐 RDS Endpoint: {DB_CONFIG['host']}")
     print("🔄 Initializing database...")
     init_db()
-    print("✅ Production Backend ready! Available at: http://0.0.0.0:5054")
-    app.run(host='0.0.0.0', port=5054, debug=False)
+    print("✅ Production Backend ready! Available at: http://0.0.0.0:8080")
+    app.run(host='0.0.0.0', port=8080, debug=False)

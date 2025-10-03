@@ -10,9 +10,6 @@ sudo apt install python3-pip python3-venv nginx -y
 sudo mkdir -p /opt/cloud-notebook/backend
 cd /opt/cloud-notebook/backend
 
-# Copy your backend files (you'll upload these)
-# scp -i your-key.pem -r backend/* ubuntu@backend-ip:/opt/cloud-notebook/backend/
-
 # Create virtual environment
 python3 -m venv venv
 source venv/bin/activate
@@ -20,10 +17,10 @@ source venv/bin/activate
 # Install Python packages
 pip install flask flask-cors mysql-connector-python
 
-# Create backend service file
+# Create backend service file for port 8080
 sudo tee /etc/systemd/system/cloud-notebook-backend.service > /dev/null <<EOF
 [Unit]
-Description=Cloud Notebook Backend
+Description=Cloud Notebook Backend (Port 8080)
 After=network.target
 
 [Service]
@@ -44,8 +41,8 @@ sudo systemctl daemon-reload
 sudo systemctl enable cloud-notebook-backend
 sudo systemctl start cloud-notebook-backend
 
-# Check status
-sudo systemctl status cloud-notebook-backend
-
+# Update security group reminder
 echo "✅ Backend deployment complete!"
-echo "🌐 Backend API available at: http://$(curl -s ifconfig.me):5054"
+echo "📝 REMEMBER: Update EC2 Security Group to allow inbound traffic on port 8080"
+echo "🌐 Backend API available at: http://\$(curl -s ifconfig.me):8080"
+echo "🔧 Backend Health: http://\$(curl -s ifconfig.me):8080/health"
