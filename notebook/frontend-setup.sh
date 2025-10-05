@@ -16,7 +16,7 @@ sudo mkdir -p /var/www/cloud-notebook
 sudo chown -R nginx:nginx /var/www/cloud-notebook
 
 # Backend host (your actual backend instance)
-BACKEND_HOST="ec2-54-87-53-238.compute-1.amazonaws.com"
+BACKEND_HOST="ec2-3-95-216-106.compute-1.amazonaws.com"
 
 # Create the frontend HTML file
 sudo cat > /var/www/cloud-notebook/index.html << 'EOF'
@@ -428,7 +428,7 @@ sudo cat > /var/www/cloud-notebook/index.html << 'EOF'
 
     <script>
         // API Configuration - Point to Your Backend EC2
-        const API_BASE_URL = 'http://ec2-54-87-53-238.compute-1.amazonaws.com:5054';
+        const API_BASE_URL = 'http://ec2-3-95-216-106.compute-1.amazonaws.com:5054';
 
         // Global state
         let currentNoteId = null;
@@ -847,7 +847,7 @@ http {
 
         # Health check endpoint
         location /health {
-            proxy_pass http://ec2-54-87-53-238.compute-1.amazonaws.com:5054/health;
+            proxy_pass http://ec2-3-95-216-106.compute-1.amazonaws.com:5054/health;
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
         }
@@ -868,4 +868,4 @@ sudo firewall-cmd --reload
 
 echo "✅ Frontend setup complete!"
 echo "🌐 Frontend URL: http://$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)"
-echo "🔗 Backend: ec2-54-87-53-238.compute-1.amazonaws.com:5054"
+echo "🔗 Backend: ec2-3-95-216-106.compute-1.amazonaws.com:5054"
